@@ -3,6 +3,6 @@ return [
     "servername" => "localhost",
     "username" => "root",
     "password" => "root",
-    "dbname" => "guest_book",
+    "dbname" => "guestbook",
     "table" => "ved"
 ];
