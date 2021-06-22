@@ -8,6 +8,7 @@ class Table extends CRUD
 {
     protected int $pageSize;
 
+
     /**
      * @return int;
      * @throws \Exception

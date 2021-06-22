@@ -8,12 +8,14 @@ use App\View\View;
 class Table extends AbstractController
 {
     protected ORMTable $model;
+    protected string $tableName = 'ved';
 
     public function __construct()
     {
         parent::__construct();
         $config = include __DIR__ . "/../../config.php";
-//        print_r($config);
+        $config['table'] = $this->tableName;
+        //        print_r($config);
         $this->model = new ORMTable($config);
     }
 
@@ -23,6 +25,7 @@ class Table extends AbstractController
      */
     public function actionShow()
     {
+        echo $this->getCurrentClass();
 //        print_r($this->model->get());
         $headers["id"] = "№";
 
@@ -58,7 +61,10 @@ class Table extends AbstractController
     {
         $this
             ->view
-            ->setData($this->model->columnComments())
+            ->setData([
+                'comments' => $this->model->columnComments(),
+                "controllerName" => $this->getCurrentClass()
+            ])
             ->setTemplate("Table/add")
             ->view();
     }
@@ -86,7 +92,8 @@ class Table extends AbstractController
             ->setData([
                 "comments" => $this->model->columnComments(),
                 "row" => $row,
-                "id" => $_GET["id"]
+                "id" => $_GET["id"],
+                "controllerName" => $this->getCurrentClass()
             ])
             ->setTemplate("Table/edit")
             ->view();

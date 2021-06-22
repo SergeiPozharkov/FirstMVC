@@ -17,4 +17,11 @@ abstract class AbstractController
     {
         header("Location: $url");
     }
+
+    public function getCurrentClass(): string
+    {
+//        return get_class($this);
+        return (new \ReflectionClass($this))->getShortName();
+    }
+
 }
